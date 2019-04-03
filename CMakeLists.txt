@@ -19,6 +19,14 @@ project(ewoms C CXX)
 
 cmake_minimum_required (VERSION 2.8)
 
+# Custom ERT/ECL -> Using Equinor's libecl (bleeding edge)
+set(EQUINOR_ECL_DIR /home/bellout/git/IOC/libecl)
+set(ecl_DIR "${EQUINOR_ECL_DIR}/cmake-build-debug")
+set(CMAKE_INSTALL_PREFIX "${EQUINOR_ECL_DIR}/cmake-build-debug/lib")
+
+set(USE_MPI OFF)
+message(STATUS "USE_MPI: ${USE_MPI}")
+
 # add the current projects cmake module directory to the search
 # path. This is not required anymore once support for federated builds
 # is merged.
@@ -294,3 +302,6 @@ opm_add_test(tutorial1
 
 opm_add_test(test_tasklets
              DRIVER_ARGS --plain)
+
+set(USE_MPI OFF)
+message(STATUS "USE_MPI: ${USE_MPI}")
